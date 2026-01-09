@@ -7,7 +7,7 @@ const highlights = [
   {
     icon: Award,
     title: "Award-Winning Advisors",
-    description: "Our team includes former Goldman Sachs partners and industry-recognized experts.",
+    description: "Our team includes former Private Banking veterans and industry-recognized experts.",
   },
   {
     icon: Users,
@@ -35,23 +35,20 @@ export function AboutSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-accent font-medium tracking-widest text-sm uppercase mb-4">
-              Who We Are
-            </p>
+            <p className="text-accent font-medium tracking-widest text-sm uppercase mb-4">Who We Are</p>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
               A Trusted Partner for
               <br />
               Exceptional Families
             </h2>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-              Founded in 1989, Sovereign Wealth Management has grown from a single 
-              family's vision into one of the nation's most respected private wealth 
-              advisory firms. We serve families who seek not just wealth management, 
-              but a true partnership built on trust, expertise, and shared values.
+              Founded in 2015, Virobel AG has grown from a single family's vision into a boutique and private Family
+              Office Platform. We serve families who seek not just wealth management, but a true partnership built on
+              trust, expertise, and shared values.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Our approach combines the sophistication of a global investment firm 
-              with the intimacy of a family office—because that's exactly what we are.
+              Our approach combines the sophistication of a global investment firm with the intimacy of a family
+              office—because that's exactly what we are.
             </p>
           </motion.div>
 
@@ -74,12 +71,8 @@ export function AboutSection() {
                   <item.icon className="w-6 h-6 text-accent" />
                 </div>
                 <div>
-                  <h4 className="font-serif text-lg text-foreground mb-1">
-                    {item.title}
-                  </h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {item.description}
-                  </p>
+                  <h4 className="font-serif text-lg text-foreground mb-1">{item.title}</h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
             ))}
