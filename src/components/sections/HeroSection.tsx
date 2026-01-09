@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-wealth.jpg";
+import heroImage from "@/assets/hero-mountain.jpg";
 
 export function HeroSection() {
   return (
@@ -10,10 +10,11 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
-          alt="Luxury yacht at sunset"
-          className="w-full h-full object-cover"
+          alt="Alpine mountain reflected in a still lake at dawn"
+          className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/95 via-navy-deep/80 to-navy-deep/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/90 via-navy-deep/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-navy-deep/30" />
       </div>
 
       {/* Content */}
