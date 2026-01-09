@@ -20,14 +20,6 @@ export function HeroSection() {
       {/* Content */}
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="max-w-3xl">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-gold font-medium tracking-widest text-sm uppercase mb-6"
-          >
-            Private Wealth Management
-          </motion.p>
           
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
