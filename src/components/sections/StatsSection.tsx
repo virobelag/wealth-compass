@@ -3,7 +3,6 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const stats = [
-  { value: "$48B+", label: "Assets Under Management" },
   { value: "150+", label: "Multigenerational Families" },
   { value: "35+", label: "Years of Excellence" },
   { value: "98%", label: "Client Retention Rate" },
