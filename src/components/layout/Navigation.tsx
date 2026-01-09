@@ -26,7 +26,7 @@ export function Navigation() {
             <img 
               src={virobelLogo} 
               alt="Virobel" 
-              className="h-12 w-auto mix-blend-multiply"
+              className="h-12 w-auto"
             />
           </Link>
 
