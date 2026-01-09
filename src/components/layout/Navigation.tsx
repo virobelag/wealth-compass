@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
+import virobelLogo from "@/assets/virobel-logo.png";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -21,13 +22,12 @@ export function Navigation() {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-sm flex items-center justify-center">
-              <span className="text-primary-foreground font-serif font-bold text-lg">S</span>
-            </div>
-            <span className="font-serif text-xl font-semibold text-foreground tracking-tight">
-              Sovereign Wealth
-            </span>
+          <Link to="/" className="flex items-center">
+            <img 
+              src={virobelLogo} 
+              alt="Virobel" 
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

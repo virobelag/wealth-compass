@@ -1,4 +1,5 @@
 import { Linkedin, Twitter } from "lucide-react";
+import virobelLogo from "@/assets/virobel-logo.png";
 
 const footerLinks = {
   company: [
@@ -28,13 +29,12 @@ export function FooterSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Logo & Description */}
           <div className="lg:col-span-2">
-            <a href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-cream rounded-sm flex items-center justify-center">
-                <span className="text-primary font-serif font-bold text-lg">S</span>
-              </div>
-              <span className="font-serif text-xl font-semibold text-cream tracking-tight">
-                Sovereign Wealth
-              </span>
+            <a href="/" className="flex items-center mb-6">
+              <img 
+                src={virobelLogo} 
+                alt="Virobel" 
+                className="h-14 w-auto brightness-0 invert"
+              />
             </a>
             <p className="text-cream/60 leading-relaxed max-w-sm mb-6">
               Dedicated to preserving and growing wealth for ultra-high-net-worth 
@@ -112,7 +112,7 @@ export function FooterSection() {
         <div className="pt-8 border-t border-cream/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-cream/50 text-sm">
-              © 2025 Sovereign Wealth Management. All rights reserved.
+              © 2025 Virobel. All rights reserved.
             </p>
             <p className="text-cream/40 text-xs max-w-2xl text-center md:text-right">
               Investment advisory services offered through Sovereign Wealth Advisors, LLC, 
