@@ -2,45 +2,54 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Philosophy", href: "#philosophy" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Team", href: "/team" },
+  { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <div className="w-10 h-10 bg-primary rounded-sm flex items-center justify-center">
               <span className="text-primary-foreground font-serif font-bold text-lg">S</span>
             </div>
             <span className="font-serif text-xl font-semibold text-foreground tracking-tight">
               Sovereign Wealth
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-accent transition-colors duration-300 tracking-wide"
+                to={link.href}
+                className={`text-sm font-medium transition-colors duration-300 tracking-wide ${
+                  location.pathname === link.href
+                    ? "text-accent"
+                    : "text-muted-foreground hover:text-accent"
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <Button variant="gold" size="lg">
-              Schedule a Consultation
-            </Button>
+            <Link to="/contact">
+              <Button variant="gold" size="lg">
+                Schedule a Consultation
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -65,18 +74,20 @@ export function Navigation() {
           >
             <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   className="text-base font-medium text-foreground hover:text-accent transition-colors py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <Button variant="gold" size="lg" className="mt-4">
-                Schedule a Consultation
-              </Button>
+              <Link to="/contact" onClick={() => setIsOpen(false)}>
+                <Button variant="gold" size="lg" className="mt-4 w-full">
+                  Schedule a Consultation
+                </Button>
+              </Link>
             </div>
           </motion.div>
         )}
