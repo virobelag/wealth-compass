@@ -7,40 +7,11 @@ import { Linkedin } from "lucide-react";
 
 const leadership = [
   {
-    name: "Richard Sovereign",
-    title: "Founder & Chairman",
-    bio: "Richard founded Sovereign Wealth Management in 1989 after a distinguished career at Goldman Sachs. He continues to guide the firm's strategic vision and personally advises our longest-standing client families.",
+    name: "Youssry Henien",
+    title: "Chairman",
+    bio: "Youssry is Chairman of Virobel AG since its inception in 2015 after a distinguished career at BNP Paribas and a Single Family Office for the Saudi Royal Family. He continues to guide the firm's strategic vision and personally advises our longest-standing client families.",
     image: null,
   },
-  {
-    name: "Elizabeth Chen",
-    title: "Chief Executive Officer",
-    bio: "Elizabeth joined Sovereign in 2005 and has led the firm since 2018. Prior to Sovereign, she was a Managing Director at Morgan Stanley Private Wealth Management.",
-    image: null,
-  },
-  {
-    name: "Marcus Thompson",
-    title: "Chief Investment Officer",
-    bio: "Marcus oversees all investment strategy and portfolio management. His 25-year career includes senior roles at Bridgewater Associates and the Yale Endowment.",
-    image: null,
-  },
-  {
-    name: "Sarah Mitchell",
-    title: "Head of Family Office Services",
-    bio: "Sarah leads our family office practice, bringing 20 years of experience serving ultra-high-net-worth families. She previously ran the family office division at Northern Trust.",
-    image: null,
-  },
-];
-
-const advisors = [
-  { name: "David Park", title: "Senior Investment Advisor", specialty: "Alternative Investments" },
-  { name: "Jennifer Walsh", title: "Senior Investment Advisor", specialty: "Fixed Income" },
-  { name: "Michael Rodriguez", title: "Director, Real Estate", specialty: "Direct Real Estate" },
-  { name: "Amanda Foster", title: "Director, Tax Planning", specialty: "Estate & Tax" },
-  { name: "Robert Kim", title: "Senior Investment Advisor", specialty: "International Equities" },
-  { name: "Catherine Moore", title: "Director, Client Services", specialty: "Client Relations" },
-  { name: "James Wilson", title: "Investment Analyst", specialty: "Research" },
-  { name: "Lisa Zhang", title: "Associate Advisor", specialty: "Next-Gen Services" },
 ];
 
 export default function Team() {
