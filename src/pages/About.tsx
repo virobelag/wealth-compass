@@ -31,29 +31,29 @@ const values = [
 
 const timeline = [
   {
-    year: "1989",
+    year: "2015",
     title: "Foundation",
-    description: "Richard Sovereign establishes the firm with a vision to provide institutional-quality investment management to select families.",
+    description: "Virobel establishes the firm with a vision to provide institutional-quality investments to select families.",
   },
   {
-    year: "1995",
+    year: "2016",
     title: "Expansion",
-    description: "Opened our San Francisco office to serve West Coast families and expanded into alternative investments.",
+    description: "Opened our Switzerland office to serve families and expanded into alternative investments.",
   },
   {
-    year: "2005",
+    year: "2018",
     title: "Family Office Services",
     description: "Launched comprehensive family office services including estate planning, tax optimization, and next-generation education.",
   },
   {
-    year: "2015",
+    year: "2020",
     title: "Global Reach",
     description: "Established international partnerships to provide clients access to global investment opportunities and multi-jurisdictional planning.",
   },
   {
-    year: "2023",
+    year: "2026",
     title: "Today",
-    description: "Managing over $48 billion for 150+ families, continuing our legacy of excellence and personalized service.",
+    description: "Managing a select group of families, continuing our legacy of excellence and personalized service.",
   },
 ];
 
@@ -85,7 +85,7 @@ export default function About() {
               Built Over Decades
             </h1>
             <p className="text-cream/70 text-lg md:text-xl leading-relaxed">
-              For over 35 years, Sovereign Wealth Management has been the trusted 
+              For over 40 years, Virobel Founder Youssry Henien has been the trusted 
               partner for families seeking exceptional stewardship of their wealth.
             </p>
           </motion.div>
@@ -107,9 +107,11 @@ export default function About() {
               </h2>
               <div className="space-y-6 text-muted-foreground leading-relaxed">
                 <p>
-                  Sovereign Wealth Management was founded in 1989 by Richard Sovereign, 
-                  a former Goldman Sachs partner who believed that ultra-high-net-worth 
-                  families deserved better than what traditional wealth management offered.
+                  Virobel Wealth Management was founded in 2015 by Youssry Henien, 
+                  a former BNP Paribas Private Banker establishing the bank first office in the
+                  Middle East and covering Government and Royal Families. Henien 
+                  believed that ultra-high-net-worth families deserved better than 
+                  what traditional wealth management offered.
                 </p>
                 <p>
                   His vision was simple yet revolutionary: create a firm that combined 
@@ -118,8 +120,8 @@ export default function About() {
                   boutique firm could provide.
                 </p>
                 <p>
-                  Today, that vision has grown into one of the nation's most respected 
-                  private wealth advisory firms. We remain true to our founding principles: 
+                  Today, that vision has grown into a boutique and respected 
+                  private wealth firm. We remain true to our founding principles: 
                   invest alongside our clients, maintain the highest ethical standards, 
                   and never lose sight of what matters most—helping families achieve 
                   their dreams across generations.
@@ -137,7 +139,7 @@ export default function About() {
               <div className="aspect-[4/5] overflow-hidden rounded-sm">
                 <img
                   src={officeImage}
-                  alt="Sovereign Wealth office"
+                  alt="Virobel office"
                   className="w-full h-full object-cover"
                 />
               </div>
