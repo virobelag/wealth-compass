@@ -8,18 +8,14 @@ import { useToast } from "@/hooks/use-toast";
 
 const offices = [
   {
-    city: "New York",
-    address: "432 Park Avenue, 57th Floor",
-    address2: "New York, NY 10022",
-    phone: "+1 (212) 555-0198",
-    email: "newyork@sovereignwealth.com",
+    city: "Zurich",
+    address: "Seefeldstrasse",
+    email: "contact@virobel.com",
   },
   {
-    city: "San Francisco",
-    address: "555 California Street, 42nd Floor",
-    address2: "San Francisco, CA 94104",
-    phone: "+1 (415) 555-0234",
-    email: "sanfrancisco@sovereignwealth.com",
+    city: "St Gallen",
+    address: "11 Birchlistrasse",
+    email: "contact@virobel.com",
   },
 ];
 
@@ -103,7 +99,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       className="w-full h-12 px-4 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                      placeholder="John Smith"
+                      placeholder="Rudolf Terek"
                     />
                   </div>
                   <div>
@@ -118,7 +114,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       className="w-full h-12 px-4 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                      placeholder="john@example.com"
+                      placeholder="client@example.com"
                     />
                   </div>
                 </div>
@@ -135,7 +131,7 @@ export default function Contact() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full h-12 px-4 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="+41 76000000"
                     />
                   </div>
                   <div>
@@ -234,10 +230,10 @@ export default function Contact() {
                       Office Hours
                     </h4>
                     <p className="text-cream/70">
-                      Monday – Friday: 8:00 AM – 6:00 PM EST
+                      Monday – Friday: 8:00 AM – 5:00 PM
                     </p>
                     <p className="text-cream/70">
-                      Weekend meetings available by appointment
+                      Remote Meetings available by appointment
                     </p>
                   </div>
                 </div>
