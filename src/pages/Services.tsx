@@ -38,9 +38,7 @@ const mainServices = [
     description: "Real estate can be a powerful wealth-building tool. We provide comprehensive guidance on direct investments, REITs, and property portfolio optimization.",
     features: [
       "Direct investment sourcing",
-      "1031 exchange planning",
       "Commercial and residential",
-      "REIT allocation strategies",
     ],
   },
   {
