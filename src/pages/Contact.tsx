@@ -2,9 +2,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/layout/Navigation";
 import { FooterSection } from "@/components/sections/FooterSection";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { MapPin, Mail, Clock, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
 
 const offices = [
   {
@@ -19,27 +21,78 @@ const offices = [
   },
 ];
 
+const formSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100),
+  email: z.string().trim().email("Please enter a valid email").max(255),
+  phone: z.string().trim().max(20).optional(),
+  location: z.string().trim().max(100).optional(),
+  message: z.string().trim().min(1, "Message is required").max(1000),
+});
+
 export default function Contact() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    assets: "",
+    location: "",
     message: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "Thank you for reaching out. A member of our team will contact you within 24 hours.",
-    });
-    setFormData({ name: "", email: "", phone: "", assets: "", message: "" });
+    setErrors({});
+
+    const result = formSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as string] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-consultation-email", {
+        body: {
+          fullName: formData.name,
+          email: formData.email,
+          phone: formData.phone || "Not provided",
+          location: formData.location || "Not provided",
+          message: formData.message,
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message Sent",
+        description: "Thank you for reaching out. A member of our team will contact you within 24 hours.",
+      });
+      setFormData({ name: "", email: "", phone: "", location: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: "" });
+    }
   };
 
   return (
@@ -101,6 +154,7 @@ export default function Contact() {
                       className="w-full h-12 px-4 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                       placeholder="Rudolf Terek"
                     />
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
@@ -116,6 +170,7 @@ export default function Contact() {
                       className="w-full h-12 px-4 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                       placeholder="client@example.com"
                     />
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -135,22 +190,18 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="assets" className="block text-sm font-medium text-foreground mb-2">
-                      Investable Assets
+                    <label htmlFor="location" className="block text-sm font-medium text-foreground mb-2">
+                      Location
                     </label>
-                    <select
-                      id="assets"
-                      name="assets"
-                      value={formData.assets}
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      value={formData.location}
                       onChange={handleChange}
-                      className="w-full h-12 px-4 bg-background border border-border rounded-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                    >
-                      <option value="">Select range</option>
-                      <option value="10-25">$10M - $25M</option>
-                      <option value="25-50">$25M - $50M</option>
-                      <option value="50-100">$50M - $100M</option>
-                      <option value="100+">$100M+</option>
-                    </select>
+                      className="w-full h-12 px-4 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                      placeholder="City, Country"
+                    />
                   </div>
                 </div>
 
@@ -168,11 +219,21 @@ export default function Contact() {
                     className="w-full px-4 py-3 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent resize-none"
                     placeholder="Tell us about your goals and how we might assist..."
                   />
+                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                 </div>
 
-                <Button type="submit" variant="gold" size="xl" className="w-full sm:w-auto">
-                  Send Message
-                  <Send className="w-4 h-4 ml-2" />
+                <Button type="submit" variant="gold" size="xl" className="w-full sm:w-auto" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="w-4 h-4 ml-2" />
+                    </>
+                  )}
                 </Button>
 
                 <p className="text-muted-foreground text-sm">

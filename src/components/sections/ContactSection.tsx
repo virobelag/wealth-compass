@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConsultationForm } from "@/components/ConsultationForm";
 
 export function ContactSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [formOpen, setFormOpen] = useState(false);
 
   return (
     <section id="contact" ref={ref} className="py-24 lg:py-32 bg-hero-gradient relative overflow-hidden">
@@ -39,7 +42,12 @@ export function ContactSection() {
               share your aspirations, and together we'll craft a strategy to achieve them.
             </p>
 
-            <Button variant="heroFilled" size="xl" className="group">
+            <Button 
+              variant="heroFilled" 
+              size="xl" 
+              className="group"
+              onClick={() => setFormOpen(true)}
+            >
               Schedule a Private Consultation
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -57,11 +65,9 @@ export function ContactSection() {
                 <MapPin className="w-5 h-5 text-gold" />
               </div>
               <div>
-                <h4 className="font-serif text-lg text-cream mb-1">New York</h4>
+                <h4 className="font-serif text-lg text-cream mb-1">Zurich</h4>
                 <p className="text-cream/60">
-                  432 Park Avenue, 57th Floor
-                  <br />
-                  New York, NY 10022
+                  Seefeldstrasse
                 </p>
               </div>
             </div>
@@ -71,22 +77,10 @@ export function ContactSection() {
                 <MapPin className="w-5 h-5 text-gold" />
               </div>
               <div>
-                <h4 className="font-serif text-lg text-cream mb-1">San Francisco</h4>
+                <h4 className="font-serif text-lg text-cream mb-1">St Gallen</h4>
                 <p className="text-cream/60">
-                  555 California Street, 42nd Floor
-                  <br />
-                  San Francisco, CA 94104
+                  11 Birchlistrasse
                 </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-5">
-              <div className="w-12 h-12 bg-cream/10 rounded-sm flex items-center justify-center flex-shrink-0">
-                <Phone className="w-5 h-5 text-gold" />
-              </div>
-              <div>
-                <h4 className="font-serif text-lg text-cream mb-1">Phone</h4>
-                <p className="text-cream/60">+1 (212) 555-0198</p>
               </div>
             </div>
 
@@ -96,12 +90,15 @@ export function ContactSection() {
               </div>
               <div>
                 <h4 className="font-serif text-lg text-cream mb-1">Email</h4>
-                <p className="text-cream/60">inquiries@sovereignwealth.com</p>
+                <p className="text-cream/60">contact@virobel.com</p>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Consultation Form Modal */}
+      <ConsultationForm open={formOpen} onOpenChange={setFormOpen} />
     </section>
   );
 }
