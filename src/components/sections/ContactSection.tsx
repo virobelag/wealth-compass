@@ -67,7 +67,7 @@ export function ContactSection() {
               <div>
                 <h4 className="font-serif text-lg text-cream mb-1">Zurich</h4>
                 <p className="text-cream/60">
-                  Seefeldstrasse
+                  Seefeldstrasse 69
                 </p>
               </div>
             </div>
