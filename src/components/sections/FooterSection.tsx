@@ -31,8 +31,7 @@ export function FooterSection() {
               />
             </a>
             <p className="text-cream/60 leading-relaxed max-w-sm mb-6">
-              Dedicated to preserving and growing wealth for ultra-high-net-worth 
-              families across generations.
+              Dedicated to serving families across generations.
             </p>
             <div className="flex gap-4">
               <a
