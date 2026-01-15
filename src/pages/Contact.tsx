@@ -205,12 +205,7 @@ export default function Contact() {
                           <MapPin className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
                           <div>
                             <p>{office.address}</p>
-                            <p>{office.address2}</p>
                           </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Phone className="w-5 h-5 text-accent flex-shrink-0" />
-                          <p>{office.phone}</p>
                         </div>
                         <div className="flex items-center gap-3">
                           <Mail className="w-5 h-5 text-accent flex-shrink-0" />

@@ -16,9 +16,7 @@ const leadership = [
 
 export default function Team() {
   const leadershipRef = useRef(null);
-  const advisorsRef = useRef(null);
   const leadershipInView = useInView(leadershipRef, { once: true, margin: "-100px" });
-  const advisorsInView = useInView(advisorsRef, { once: true, margin: "-100px" });
 
   return (
     <main className="min-h-screen">
@@ -109,51 +107,6 @@ export default function Team() {
         </div>
       </section>
 
-      {/* Advisors */}
-      <section ref={advisorsRef} className="py-24 lg:py-32 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={advisorsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <p className="text-accent font-medium tracking-widest text-sm uppercase mb-4">
-              Our Advisors
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">
-              The Team Behind the Team
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Our advisors bring diverse expertise and backgrounds, united by a 
-              commitment to serving our clients with excellence.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {advisors.map((person, index) => (
-              <motion.div
-                key={person.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={advisorsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="bg-card p-6 rounded-sm text-center"
-              >
-                <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="font-serif text-lg text-muted-foreground">
-                    {person.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <h4 className="font-serif text-lg text-foreground mb-1">
-                  {person.name}
-                </h4>
-                <p className="text-accent text-sm mb-2">{person.title}</p>
-                <p className="text-muted-foreground text-xs">{person.specialty}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Join Us CTA */}
       <section className="py-20 bg-primary">
