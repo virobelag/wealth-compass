@@ -61,8 +61,8 @@ export function HeroSection() {
               Start Your Journey
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="hero" size="xl">
-              Explore Our Services
+            <Button variant="hero" size="xl" asChild>
+              <a href="/services">Explore Our Services</a>
             </Button>
           </motion.div>
         </div>
