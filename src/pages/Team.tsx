@@ -74,13 +74,6 @@ export default function Team() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-card rounded-sm overflow-hidden group"
               >
-                <div className="aspect-[4/3] bg-secondary flex items-center justify-center">
-                  <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center">
-                    <span className="font-serif text-3xl text-muted-foreground">
-                      {person.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                </div>
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-4">
                     <div>
