@@ -32,7 +32,7 @@ export default function Team() {
             className="max-w-3xl"
           >
             <p className="text-gold font-medium tracking-widest text-sm uppercase mb-4">
-              Our Team
+              Founder
             </p>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-cream leading-tight mb-6">
               Exceptional People,
