@@ -5,14 +5,12 @@ const footerLinks = {
   company: [
     { label: "About Us", href: "#about" },
     { label: "Our Team", href: "#team" },
-    { label: "Careers", href: "#careers" },
     { label: "News & Insights", href: "#news" },
   ],
   services: [
-    { label: "Investment Management", href: "#services" },
+    { label: "Investments", href: "#services" },
     { label: "Family Office", href: "#services" },
     { label: "Estate Planning", href: "#services" },
-    { label: "Private Banking", href: "#services" },
   ],
   legal: [
     { label: "Privacy Policy", href: "#privacy" },
