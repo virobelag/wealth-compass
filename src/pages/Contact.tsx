@@ -11,7 +11,7 @@ import { z } from "zod";
 const offices = [
   {
     city: "Zurich",
-    address: "Seefeldstrasse",
+    address: "Seefeldstrasse 69",
     email: "contact@virobel.com",
   },
   {
