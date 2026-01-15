@@ -60,7 +60,7 @@ export default function Team() {
               Leadership
             </p>
             <h2 className="font-serif text-3xl md:text-4xl text-foreground">
-              Senior Partners
+              Chairman
             </h2>
           </motion.div>
 
