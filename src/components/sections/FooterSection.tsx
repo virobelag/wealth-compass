@@ -3,14 +3,12 @@ import virobelLogo from "@/assets/virobel-logo.png";
 
 const footerLinks = {
   company: [
-    { label: "About Us", href: "#about" },
+    { label: "About Us", href: "/about" },
     { label: "Founder", href: "/team" },
-    { label: "News & Insights", href: "#news" },
+    { label: "News & Insights", href: "/insights" },
   ],
   services: [
-    { label: "Investments", href: "#services" },
-    { label: "Family Office", href: "#services" },
-    { label: "Estate Planning", href: "#services" },
+    { label: "Family Office", href: "/family-office" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
