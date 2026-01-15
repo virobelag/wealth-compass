@@ -13,7 +13,7 @@ const footerLinks = {
     { label: "Estate Planning", href: "#services" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "#privacy" },
+    { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "#terms" },
     { label: "Disclosures", href: "#disclosures" },
   ],
