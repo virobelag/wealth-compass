@@ -1,4 +1,5 @@
 import { Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 import virobelLogo from "@/assets/virobel-logo.png";
 
 const footerLinks = {
@@ -23,13 +24,13 @@ export function FooterSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Logo & Description */}
           <div className="lg:col-span-2">
-            <a href="/" className="flex items-center mb-6">
+            <Link to="/" className="flex items-center mb-6">
               <img 
                 src={virobelLogo} 
                 alt="Virobel" 
                 className="h-14 w-auto brightness-0 invert"
               />
-            </a>
+            </Link>
             <p className="text-cream/60 leading-relaxed max-w-sm mb-6">
               Dedicated to serving families across generations.
             </p>
@@ -51,12 +52,12 @@ export function FooterSection() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-cream/60 hover:text-gold transition-colors text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -68,12 +69,12 @@ export function FooterSection() {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-cream/60 hover:text-gold transition-colors text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -85,12 +86,12 @@ export function FooterSection() {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-cream/60 hover:text-gold transition-colors text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
