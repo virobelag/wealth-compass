@@ -64,7 +64,8 @@ export default function Team() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="flex justify-center">
+            <div className="max-w-md w-full">
             {leadership.map((person, index) => (
               <motion.div
                 key={person.name}
@@ -103,6 +104,7 @@ export default function Team() {
                 </div>
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
       </section>
