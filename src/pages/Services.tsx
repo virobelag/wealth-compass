@@ -12,7 +12,7 @@ import {
 const mainServices = [
   {
     icon: TrendingUp,
-    title: "Investment",
+    title: "Investments",
     description: "Our investment philosophy combines rigorous fundamental analysis with a long-term perspective. We construct diversified portfolios tailored to each family's unique objectives, risk tolerance, and time horizon.",
     features: [
       "Custom portfolio construction",
