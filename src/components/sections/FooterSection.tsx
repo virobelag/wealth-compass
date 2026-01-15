@@ -35,7 +35,9 @@ export function FooterSection() {
             </p>
             <div className="flex gap-4">
               <a
-                href="#linkedin"
+                href="https://www.linkedin.com/company/virobel/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-cream/10 rounded-sm flex items-center justify-center hover:bg-cream/20 transition-colors"
               >
                 <Linkedin className="w-5 h-5 text-cream" />
