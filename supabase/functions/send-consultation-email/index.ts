@@ -39,7 +39,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to company
     const companyEmailResponse = await resend.emails.send({
       from: "Virobel <onboarding@resend.dev>",
-      to: ["info@virobel.com"], // Replace with your actual company email
+      to: ["contact@virobel.com"],
       subject: `New Consultation Request from ${fullName}`,
       html: `
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #0A1628; color: #F5F0E6;">
