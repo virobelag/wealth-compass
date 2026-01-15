@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConsultationForm } from "@/components/ConsultationForm";
 import heroImage from "@/assets/hero-mountain.jpg";
 
 export function HeroSection() {
+  const [formOpen, setFormOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center pt-20">
       {/* Background Image */}
@@ -48,7 +52,12 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button variant="heroFilled" size="xl" className="group">
+            <Button 
+              variant="heroFilled" 
+              size="xl" 
+              className="group"
+              onClick={() => setFormOpen(true)}
+            >
               Start Your Journey
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -61,6 +70,9 @@ export function HeroSection() {
 
       {/* Bottom Gradient Fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
+
+      {/* Consultation Form Modal */}
+      <ConsultationForm open={formOpen} onOpenChange={setFormOpen} />
     </section>
   );
 }
