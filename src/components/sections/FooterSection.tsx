@@ -4,7 +4,7 @@ import virobelLogo from "@/assets/virobel-logo.png";
 const footerLinks = {
   company: [
     { label: "About Us", href: "#about" },
-    { label: "Our Team", href: "#team" },
+    { label: "Founder", href: "/team" },
     { label: "News & Insights", href: "#news" },
   ],
   services: [
