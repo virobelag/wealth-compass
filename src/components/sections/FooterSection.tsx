@@ -1,4 +1,4 @@
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import virobelLogo from "@/assets/virobel-logo.png";
 
 const footerLinks = {
@@ -41,12 +41,6 @@ export function FooterSection() {
                 className="w-10 h-10 bg-cream/10 rounded-sm flex items-center justify-center hover:bg-cream/20 transition-colors"
               >
                 <Linkedin className="w-5 h-5 text-cream" />
-              </a>
-              <a
-                href="#twitter"
-                className="w-10 h-10 bg-cream/10 rounded-sm flex items-center justify-center hover:bg-cream/20 transition-colors"
-              >
-                <Twitter className="w-5 h-5 text-cream" />
               </a>
             </div>
           </div>
