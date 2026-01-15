@@ -18,7 +18,6 @@ const footerLinks = {
     { label: "Privacy Policy", href: "#privacy" },
     { label: "Terms of Service", href: "#terms" },
     { label: "Disclosures", href: "#disclosures" },
-    { label: "Form CRS", href: "#formcrs" },
   ],
 };
 
@@ -110,15 +109,9 @@ export function FooterSection() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-cream/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-cream/50 text-sm">
-              © 2025 Virobel. All rights reserved.
-            </p>
-            <p className="text-cream/40 text-xs max-w-2xl text-center md:text-right">
-              Investment advisory services offered through Sovereign Wealth Advisors, LLC, 
-              a registered investment adviser. Past performance is not a guarantee of future results.
-            </p>
-          </div>
+          <p className="text-cream/50 text-sm text-center md:text-left">
+            © 2025 Virobel. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
