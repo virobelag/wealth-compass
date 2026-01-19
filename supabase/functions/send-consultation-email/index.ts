@@ -16,6 +16,73 @@ interface ConsultationRequest {
   message?: string;
 }
 
+// In-memory rate limiting store (resets on function cold start)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+const RATE_LIMIT_MAX_REQUESTS = 5; // Max requests per window
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour window
+
+/**
+ * Escape HTML special characters to prevent HTML injection in emails
+ */
+function escapeHtml(text: string): string {
+  const htmlEntities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+  };
+  return text.replace(/[&<>"']/g, (char) => htmlEntities[char] || char);
+}
+
+/**
+ * Check rate limit for an IP address
+ * Returns true if rate limit is exceeded
+ */
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitStore.get(ip);
+
+  if (!record || now > record.resetTime) {
+    // New window - reset the counter
+    rateLimitStore.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return true;
+  }
+
+  // Increment counter
+  record.count++;
+  rateLimitStore.set(ip, record);
+  return false;
+}
+
+/**
+ * Get client IP from request headers
+ */
+function getClientIp(req: Request): string {
+  // Try various headers that might contain the real IP
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0].trim();
+  }
+  
+  const realIp = req.headers.get("x-real-ip");
+  if (realIp) {
+    return realIp;
+  }
+  
+  const cfConnectingIp = req.headers.get("cf-connecting-ip");
+  if (cfConnectingIp) {
+    return cfConnectingIp;
+  }
+  
+  return "unknown";
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -23,24 +90,60 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Check rate limit
+    const clientIp = getClientIp(req);
+    if (isRateLimited(clientIp)) {
+      console.warn("Rate limit exceeded for IP:", clientIp);
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please try again later." }),
+        { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     const { fullName, email, phone, location, message }: ConsultationRequest = await req.json();
 
     // Validate required fields
     if (!fullName || !email || !phone || !location) {
-      console.error("Missing required fields:", { fullName, email, phone, location });
+      console.warn("Missing required fields in consultation request");
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
-    console.log("Sending consultation email for:", fullName, email);
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      console.warn("Invalid email format in consultation request");
+      return new Response(
+        JSON.stringify({ error: "Invalid email format" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Validate input lengths to prevent abuse
+    if (fullName.length > 100 || email.length > 255 || phone.length > 30 || location.length > 200 || (message && message.length > 2000)) {
+      console.warn("Input validation failed: field too long");
+      return new Response(
+        JSON.stringify({ error: "Input validation failed" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    console.log("Processing consultation request");
+
+    // Escape all user inputs for safe HTML embedding
+    const safeFullName = escapeHtml(fullName);
+    const safeEmail = escapeHtml(email);
+    const safePhone = escapeHtml(phone);
+    const safeLocation = escapeHtml(location);
+    const safeMessage = message ? escapeHtml(message) : null;
 
     // Send notification email to company
     const companyEmailResponse = await resend.emails.send({
       from: "Virobel <onboarding@resend.dev>",
       to: ["contact@virobel.com"],
-      subject: `New Consultation Request from ${fullName}`,
+      subject: `New Consultation Request from ${safeFullName}`,
       html: `
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #0A1628; color: #F5F0E6;">
           <h1 style="color: #C9A962; border-bottom: 1px solid #C9A962; padding-bottom: 10px;">
@@ -49,16 +152,16 @@ const handler = async (req: Request): Promise<Response> => {
           
           <div style="margin: 20px 0;">
             <h3 style="color: #C9A962; margin-bottom: 5px;">Contact Information</h3>
-            <p><strong>Name:</strong> ${fullName}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}" style="color: #D4B978;">${email}</a></p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Location:</strong> ${location}</p>
+            <p><strong>Name:</strong> ${safeFullName}</p>
+            <p><strong>Email:</strong> <a href="mailto:${safeEmail}" style="color: #D4B978;">${safeEmail}</a></p>
+            <p><strong>Phone:</strong> ${safePhone}</p>
+            <p><strong>Location:</strong> ${safeLocation}</p>
           </div>
           
-          ${message ? `
+          ${safeMessage ? `
           <div style="margin: 20px 0;">
             <h3 style="color: #C9A962; margin-bottom: 5px;">Message</h3>
-            <p style="white-space: pre-wrap;">${message}</p>
+            <p style="white-space: pre-wrap;">${safeMessage}</p>
           </div>
           ` : ''}
           
@@ -70,7 +173,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Company email sent:", companyEmailResponse);
+    console.log("Company email sent successfully");
 
     // Send confirmation email to the user
     const userEmailResponse = await resend.emails.send({
@@ -80,7 +183,7 @@ const handler = async (req: Request): Promise<Response> => {
       html: `
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #0A1628; color: #F5F0E6;">
           <h1 style="color: #C9A962; border-bottom: 1px solid #C9A962; padding-bottom: 10px;">
-            Thank You, ${fullName}
+            Thank You, ${safeFullName}
           </h1>
           
           <p style="line-height: 1.6;">
@@ -117,16 +220,16 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("User confirmation email sent:", userEmailResponse);
+    console.log("User confirmation email sent successfully");
 
     return new Response(
       JSON.stringify({ success: true, message: "Emails sent successfully" }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: any) {
-    console.error("Error in send-consultation-email function:", error);
+    console.error("Error in send-consultation-email function:", error.message);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "Failed to send email. Please try again later." }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
