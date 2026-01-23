@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ConsultationForm } from "@/components/ConsultationForm";
 import heroImage from "@/assets/hero-mountain.jpg";
@@ -62,7 +63,7 @@ export function HeroSection() {
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button variant="hero" size="xl" asChild>
-              <a href="/services">Explore Our Services</a>
+              <Link to="/services">Explore Our Services</Link>
             </Button>
           </motion.div>
         </div>
