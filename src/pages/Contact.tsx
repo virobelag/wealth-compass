@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/layout/Navigation";
 import { FooterSection } from "@/components/sections/FooterSection";
-import { MapPin, Mail, Clock, Send, Loader2 } from "lucide-react";
+import { MapPin, Mail, Phone, Clock, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -11,12 +11,14 @@ import { z } from "zod";
 const offices = [
   {
     city: "Zurich",
-    address: "Seefeldstrasse 69",
+    address: "Bahnhofplatz 1, 8001 Zurich, Switzerland",
+    phone: "+41 78 249 9994",
     email: "contact@virobel.com",
   },
   {
     city: "St Gallen",
     address: "11 Birchlistrasse",
+    phone: "+41 78 249 9994",
     email: "contact@virobel.com",
   },
 ];
@@ -267,6 +269,15 @@ export default function Contact() {
                           <div>
                             <p>{office.address}</p>
                           </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Phone className="w-5 h-5 text-accent flex-shrink-0" />
+                          <a
+                            href={`tel:${office.phone.replace(/\s/g, "")}`}
+                            className="hover:text-accent transition-colors"
+                          >
+                            {office.phone}
+                          </a>
                         </div>
                         <div className="flex items-center gap-3">
                           <Mail className="w-5 h-5 text-accent flex-shrink-0" />

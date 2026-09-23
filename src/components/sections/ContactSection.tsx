@@ -67,7 +67,7 @@ export function ContactSection() {
               <div>
                 <h4 className="font-serif text-lg text-cream mb-1">Zurich</h4>
                 <p className="text-cream/60">
-                  Seefeldstrasse 69
+                  Bahnhofplatz 1, 8001 Zurich, Switzerland
                 </p>
               </div>
             </div>
@@ -81,6 +81,21 @@ export function ContactSection() {
                 <p className="text-cream/60">
                   11 Birchlistrasse
                 </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-5">
+              <div className="w-12 h-12 bg-cream/10 rounded-sm flex items-center justify-center flex-shrink-0">
+                <Phone className="w-5 h-5 text-gold" />
+              </div>
+              <div>
+                <h4 className="font-serif text-lg text-cream mb-1">Phone</h4>
+                <a
+                  href="tel:+41782499994"
+                  className="text-cream/60 hover:text-gold transition-colors"
+                >
+                  +41 78 249 9994
+                </a>
               </div>
             </div>
 

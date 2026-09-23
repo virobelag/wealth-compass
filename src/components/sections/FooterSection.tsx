@@ -1,4 +1,4 @@
-import { Linkedin } from "lucide-react";
+import { Linkedin, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import virobelLogo from "@/assets/virobel-logo.png";
 
@@ -34,6 +34,19 @@ export function FooterSection() {
             <p className="text-cream/60 leading-relaxed max-w-sm mb-6">
               Dedicated to serving families across generations.
             </p>
+            <div className="space-y-3 mb-6">
+              <a
+                href="tel:+41782499994"
+                className="flex items-center gap-3 text-cream/60 hover:text-gold transition-colors text-sm"
+              >
+                <Phone className="w-4 h-4 flex-shrink-0" />
+                +41 78 249 9994
+              </a>
+              <p className="flex items-start gap-3 text-cream/60 text-sm">
+                <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                Bahnhofplatz 1, 8001 Zurich, Switzerland
+              </p>
+            </div>
             <div className="flex gap-4">
               <a
                 href="https://www.linkedin.com/company/virobel/"

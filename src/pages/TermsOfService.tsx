@@ -129,7 +129,8 @@ export default function TermsOfService() {
                 </p>
                 <div className="mt-4 p-6 bg-secondary rounded-sm">
                   <p className="text-foreground font-medium">Virobel AG</p>
-                  <p className="text-muted-foreground">Seefeldstrasse 69, Zurich</p>
+                  <p className="text-muted-foreground">Bahnhofplatz 1, 8001 Zurich, Switzerland</p>
+                  <p className="text-muted-foreground">Phone: +41 78 249 9994</p>
                   <p className="text-muted-foreground">Email: contact@virobel.com</p>
                 </div>
               </div>
