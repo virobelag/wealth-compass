@@ -15,12 +15,6 @@ const offices = [
     phone: "+41 78 249 9994",
     email: "contact@virobel.com",
   },
-  {
-    city: "St Gallen",
-    address: "11 Birchlistrasse",
-    phone: "+41 78 249 9994",
-    email: "contact@virobel.com",
-  },
 ];
 
 const formSchema = z.object({
